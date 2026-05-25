@@ -54,6 +54,12 @@ class Settings(BaseSettings):
     def allowed_numbers_list(self) -> list[str]:
         return [n.strip() for n in self.allowed_numbers.split(",") if n.strip()]
 
+    blacklisted_numbers: str = ""
+
+    @property
+    def blacklisted_numbers_list(self) -> list[str]:
+        return [n.strip() for n in self.blacklisted_numbers.split(",") if n.strip()]
+
 
 @lru_cache
 def get_settings() -> Settings:

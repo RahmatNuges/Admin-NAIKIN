@@ -23,7 +23,7 @@ _lead_locks: dict[str, asyncio.Lock] = {}
 def _check_bridge_token(x_bridge_token: str | None) -> None:
     s = get_settings()
     if not s.bridge_token:
-        return  # no token configured -> open
+        return
     if x_bridge_token != s.bridge_token:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="invalid bridge token")
 
@@ -36,13 +36,20 @@ async def webhook_wa(
 ) -> WebhookMessageOut:
     _check_bridge_token(x_bridge_token)
 
-    # Whitelist check — skip if ALLOWED_NUMBERS is set and number not in list
     s = get_settings()
+
+    # Blacklist check — never reply to these numbers
+    blacklisted = s.blacklisted_numbers_list
+    if blacklisted and payload.wa_number in blacklisted:
+        logger.info("ignoring blacklisted number: %s", payload.wa_number)
+        return WebhookMessageOut(reply="", state="NEW", skipped=True, reason="blacklisted")
+
+    # Whitelist check — only reply to these numbers (testing mode)
     allowed = s.allowed_numbers_list
     if allowed and payload.wa_number not in allowed:
-        logger.info("ignoring message from non-whitelisted number: %s", payload.wa_number)
+        logger.info("ignoring non-whitelisted number: %s", payload.wa_number)
         return WebhookMessageOut(reply="", state="NEW", skipped=True, reason="not whitelisted")
-        _lead_locks[payload.wa_number] = asyncio.Lock()
+
     if payload.wa_number not in _lead_locks:
         _lead_locks[payload.wa_number] = asyncio.Lock()
     lock = _lead_locks[payload.wa_number]
@@ -56,8 +63,7 @@ async def webhook_wa(
         )
         db.commit()
 
-    # Re-fetch lead for notify side-effect
-    from app.models import Lead, LeadState
+    from app.models import Lead
     from app.state import ESCALATE_STATES
 
     lead = db.query(Lead).filter(Lead.wa_number == payload.wa_number).one()
