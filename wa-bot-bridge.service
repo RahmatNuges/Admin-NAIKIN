@@ -1,0 +1,19 @@
+[Unit]
+Description=NAIKIN WA Bot — Baileys Bridge (Node.js)
+After=network.target wa-bot-backend.service
+Wants=wa-bot-backend.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/wa-bot-klinik/baileys-bridge
+EnvironmentFile=/root/wa-bot-klinik/.env
+ExecStart=/usr/bin/node src/index.js
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=wa-bot-bridge
+
+[Install]
+WantedBy=multi-user.target

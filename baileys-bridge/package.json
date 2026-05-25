@@ -1,0 +1,19 @@
+{
+  "name": "wa-bot-klinik-bridge",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Baileys bridge: WhatsApp <-> Python backend",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js"
+  },
+  "dependencies": {
+    "@whiskeysockets/baileys": "^6.7.9",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "pino": "^9.5.0",
+    "qrcode-terminal": "^0.12.0"
+  }
+}

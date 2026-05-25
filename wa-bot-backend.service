@@ -1,0 +1,18 @@
+[Unit]
+Description=NAIKIN WA Bot — Python FastAPI Backend
+After=network.target
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/wa-bot-klinik/backend
+EnvironmentFile=/root/wa-bot-klinik/.env
+ExecStart=/root/wa-bot-klinik/backend/.venv/bin/uvicorn app.main:app --host 127.0.0.1 --port 8000
+Restart=always
+RestartSec=5
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=wa-bot-backend
+
+[Install]
+WantedBy=multi-user.target
