@@ -1,0 +1,25 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy & import leads
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: root
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            cd /root/wa-bot-klinik
+            git pull
+            cd backend
+            source .venv/bin/activate
+            python -m app.cli.import_leads --csv ../data/leads_template.csv
+            systemctl restart wa-bot-backend
+            echo "Deploy done"
