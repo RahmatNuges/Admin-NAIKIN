@@ -10,11 +10,12 @@ logger = logging.getLogger(__name__)
 
 async def notify_owner(message: str) -> None:
     s = get_settings()
-    if not s.owner_wa_number:
-        logger.warning("OWNER_WA_NUMBER empty — skipping notification: %s", message)
+    number = s.effective_alert_number
+    if not number:
+        logger.warning("no alert number configured — skipping notification: %s", message)
         return
     try:
-        await send_message(s.owner_wa_number, f"[BOT-NOTIF] {message}")
+        await send_message(number, f"[BOT-NOTIF] {message}")
     except BridgeError as e:
         logger.error("failed to notify owner: %s", e)
 
@@ -32,4 +33,4 @@ async def notify_lead_ready_for_call(lead_name: str, wa_number: str, last_messag
 
 
 async def notify_llm_failure(wa_number: str, error: str) -> None:
-    await notify_owner(f"LLM error untuk {wa_number}: {error}. Bot fallback ke pesan default.")
+    await notify_owner(f"LLM error untuk {wa_number}: {error}. Bot diam, perlu takeover manual.")

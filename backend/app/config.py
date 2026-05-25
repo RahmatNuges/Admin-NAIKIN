@@ -56,6 +56,13 @@ class Settings(BaseSettings):
 
     blacklisted_numbers: str = ""
 
+    # Alert number for errors — defaults to OWNER_WA_NUMBER if not set
+    alert_wa_number: str = ""
+
+    @property
+    def effective_alert_number(self) -> str:
+        return self.alert_wa_number or self.owner_wa_number
+
     @property
     def blacklisted_numbers_list(self) -> list[str]:
         return [n.strip() for n in self.blacklisted_numbers.split(",") if n.strip()]
