@@ -57,3 +57,4 @@ Lihat plan di `/Users/nuges/.claude/plans/ethereal-riding-dewdrop.md`.
 - Backend: systemd unit `wa-bot-backend.service`.
 - Bridge: PM2 `pm2 start baileys-bridge/src/index.js --name wa-bridge`.
 - Reverse proxy nginx hanya jika backend perlu diakses dari luar (default semua localhost).
+
