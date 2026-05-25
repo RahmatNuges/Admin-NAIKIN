@@ -134,6 +134,14 @@ async def handle_inbound(
     client = llm or LLMClient()
     system_prompt = build_system_prompt(lead)
     convo_history = history_messages(db, lead, s.conversation_history_limit)
+
+    # Inject JSON reminder into last user message to enforce output format
+    if convo_history and convo_history[-1]["role"] == "user":
+        convo_history[-1] = {
+            "role": "user",
+            "content": convo_history[-1]["content"] + "\n\n[WAJIB: Balas dalam JSON valid sesuai schema di system prompt. Jangan balas dengan teks biasa.]",
+        }
+
     messages = [{"role": "system", "content": system_prompt}, *convo_history]
 
     reply_text = FALLBACK_REPLY
