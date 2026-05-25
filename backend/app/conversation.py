@@ -152,7 +152,9 @@ async def handle_inbound(
 
     try:
         parsed, meta = await client.chat_json(messages, temperature=0.7, max_tokens=2000, json_mode=False)
-        reply_text = (parsed.get("reply") or "").strip() or FALLBACK_REPLY
+        reply_text = (parsed.get("reply") or "").strip() or ""
+        # Strip em/en dash — LLM sometimes ignores the instruction
+        reply_text = reply_text.replace("—", ",").replace("–", ",")
         suggested_state = parse_suggested_state(parsed.get("suggested_state"))
         intent = parsed.get("detected_intent")
     except LLMError as e:
