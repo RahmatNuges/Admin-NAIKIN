@@ -150,6 +150,7 @@ async def handle_inbound(
     except LLMError as e:
         logger.error("LLM call failed for %s: %s", wa_number, e)
         llm_failed = True
+        return "", lead.state, True  # silent fail — no reply sent
 
     if not intent:
         intent = detect_intent(body)

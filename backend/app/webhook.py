@@ -63,13 +63,14 @@ async def webhook_wa(
     lead = db.query(Lead).filter(Lead.wa_number == payload.wa_number).one()
 
     try:
-        await send_message(payload.wa_number, reply, reply_jid=payload.reply_jid)
+        if reply:
+            await send_message(payload.wa_number, reply, reply_jid=payload.reply_jid)
     except BridgeError as e:
         logger.error("failed to send reply via bridge: %s", e)
 
     if escalate and lead.state in ESCALATE_STATES:
         await notify_lead_ready_for_call(lead.name or "", lead.wa_number, payload.body)
-    elif escalate:
-        await notify_llm_failure(payload.wa_number, "LLM call failed; sent fallback reply")
+    elif escalate and not reply:
+        await notify_llm_failure(payload.wa_number, "LLM call failed; bot diam (silent fail)")
 
     return WebhookMessageOut(reply=reply, state=new_state)
