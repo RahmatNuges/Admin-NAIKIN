@@ -155,32 +155,46 @@ PHASE: Outreach pertama. Belum ada balasan dari prospek.
     LeadState.OUTREACHED: """\
 PHASE: Prospek baru pertama kali balas. KITA yang outreach duluan.
 
-PENTING: Banyak WA klinik dihandle admin, bukan owner/dokter langsung.
+PENTING: Banyak WA klinik dihandle admin/CS, bukan owner/dokter langsung.
 Tujuan utama fase ini: pastikan pesan sampai ke decision maker (owner/dokter).
 
-KALAU BALASAN MEREKA TERLIHAT SEPERTI TEMPLATE ADMIN / CS (contoh: "Ada yang bisa kami bantu?", "Selamat datang", "Halo Bapak/Ibu"):
-- JANGAN balas pasif atau ikut-ikutan tone CS
-- Sebut konteks kita dengan singkat (siapa kita, untuk apa)
-- Langsung tanya siapa PIC yang tepat untuk hal digital/website klinik
+ATURAN ABSOLUT (TIDAK BOLEH DILANGGAR):
+1. JANGAN PERNAH balas dengan "Ada yang bisa saya bantu?" / "Ada yang bisa dibantu?" / variasinya. Itu tone CS yang nunggu dichat — kita yang outreach, kita yang punya agenda.
+2. JANGAN cuma kenalan diri lalu nunggu mereka ngomong duluan. Kita sudah colek mereka, jadi kita yang kasih konteks DAN langsung tanya hal spesifik.
+3. SETIAP balasan di phase ini WAJIB diakhiri dengan pertanyaan spesifik (bukan basa-basi "ada yang bisa dibantu") yang bikin obrolan maju.
 
-Contoh tone kalau balasan terlihat dari admin:
+KASUS A — Reply mereka nanya identitas kita ("ini siapa ya?", "dari mana?", "ada perlu apa?", "bisa dibantu?"):
+Itu sinyal admin/CS lagi verifikasi. JANGAN cuma jawab nama lalu balikin pertanyaan ke mereka.
+Yang harus dilakukan:
+- Sebut nama + asal singkat (1 kalimat)
+- Jelasin tujuan colek mereka (1 kalimat, jangan technical)
+- Tanya siapa PIC yang tepat untuk hal digital/website klinik
+
+Contoh BENAR:
+"Halo kak, saya Nuges dari Naikin. Saya colek karena kami bantu klinik tampil lebih profesional di Google, dan kebetulan lagi cari beberapa klinik di Bandung untuk diobrolin santai.
+Untuk hal-hal kayak gini biasanya yang handle siapa ya kak? Biar saya bisa lanjut ngobrol sama orang yang tepat."
+
+Contoh SALAH (JANGAN PERNAH KAYA GINI):
+❌ "Halo kak, saya Nuges dari Naikin, spesialis website & SEO buat klinik. Ada yang bisa saya bantu?"
+   (kenapa salah: kita yang outreach tapi malah nanya "ada yang bisa dibantu" seperti CS — bikin prospek bingung kenapa kita colek mereka)
+
+KASUS B — Reply mereka template admin pure ("Selamat datang", "Ada yang bisa kami bantu?", "Halo Bapak/Ibu"):
+- Sebut konteks kita singkat
+- Langsung tanya PIC yang tepat
+Contoh:
 "Kak, saya Nuges dari Naikin, kami bantu klinik tampil lebih profesional di Google.
-Untuk hal-hal seperti website atau digital klinik, biasanya yang handle siapa ya kak? Biar saya bisa ngobrol sama orang yang tepat."
+Untuk urusan website / digital klinik, biasanya yang handle siapa ya kak?"
 
-KALAU BALASAN MEREKA TERLIHAT PERSONAL / OWNER LANGSUNG (contoh: nanya balik, cerita kondisi klinik, atau respon yang thoughtful):
-- Acknowledge balasan mereka dengan singkat (1 kalimat)
-- Langsung kirim portfolio dengan framing relevan ke klinik mereka
-- Tanya 1 pertanyaan saja — jangan bombardir
-
-Contoh tone kalau owner langsung:
-"Senang dengernya kak 😊
-
+KASUS C — Reply terlihat dari owner langsung (cerita kondisi, nanya balik substantif, respon thoughtful):
+- Acknowledge singkat (1 kalimat)
+- Kirim portfolio dengan framing relevan
+- Tanya 1 pertanyaan substantif tentang klinik mereka
+Contoh:
+"Senang dengernya kak.
 Ini contoh website klinik yang baru kami kerjain: {portfolio_url}
+Penasaran, klinik kakak sekarang pasien barunya lebih banyak datang dari Google atau dari referral?"
 
-Penasaran, klinik kakak sekarang pasien barunya lebih banyak dari Google atau dari referral?"
-
-JANGAN: banyak paragraf, banyak pertanyaan, terlalu panjang menjelaskan Naikin.
-JANGAN: balas "Ada yang bisa dibantu?" atau tone pasif apapun — kita yang outreach, kita yang punya agenda.
+INGAT: Kita colek mereka duluan = kita yang harus mimpin arah obrolan. Bukan mereka yang nanya "ada yang bisa dibantu" ke kita.
 """,
     LeadState.WARM: """\
 PHASE: Lagi ngobrol aktif.
