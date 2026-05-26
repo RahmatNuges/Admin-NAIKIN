@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 import csv
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 import phonenumbers
@@ -106,7 +106,7 @@ def main(argv: list[str] | None = None) -> int:
             db.add(
                 OutreachQueue(
                     lead_id=lead.id,
-                    scheduled_at=slot.replace(tzinfo=None),
+                    scheduled_at=slot.astimezone(timezone.utc).replace(tzinfo=None),
                     status=OutreachStatus.PENDING,
                 )
             )
